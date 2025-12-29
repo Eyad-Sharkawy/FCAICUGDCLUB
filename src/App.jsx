@@ -4,32 +4,32 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import './styles/App.css'; 
 
-import heroVideoFile from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/intro.mp4'; 
+import heroVideoFile from './public/intro.mp4'; 
 
-import logoImageFile from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/omar.png';
+import logoImageFile from './public/omar.png';
 
-import omarImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import mohamedImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/mohamed.png';
-import joyImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/joy.png';
-import andrewImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import mahmoudImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import yassinImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/yassin.png';
-import hamadaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/hamada.png';
-import bahaaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import abdullahImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import ammarImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import alaaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/alaa.png';
-import ayatImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import habibaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import lojainImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import mariamImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/mariam.png';
-import sebaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import nadaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
-import roaaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.png';
+import omarImg from './public/assets/team/omar.png';
+import mohamedImg from './public/assets/team/mohamed.png';
+import joyImg from './public/assets/team/joy.png';
+import andrewImg from './public/assets/team/omar.png';
+import mahmoudImg from './public/assets/team/omar.png';
+import yassinImg from './public/assets/team/yassin.png';
+import hamadaImg from './public/assets/team/hamada.png';
+import bahaaImg from './public/assets/team/omar.png';
+import abdullahImg from './public/assets/team/omar.png';
+import ammarImg from './public/assets/team/omar.png';
+import alaaImg from './public/assets/team/alaa.png';
+import ayatImg from './public/assets/team/omar.png';
+import habibaImg from './public/assets/team/omar.png';
+import lojainImg from './public/assets/team/omar.png';
+import mariamImg from './public/assets/team/mariam.png';
+import sebaImg from './public/assets/team/omar.png';
+import nadaImg from './public/assets/team/omar.png';
+import roaaImg from './public/assets/team/omar.png';
 
 
-import vidThumbnail from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/thumbnails/thumbnail1.jpg';
-import teamImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/team.png';
+import vidThumbnail from './public/assets/thumbnails/thumbnail1.jpg';
+import teamImg from './public/assets/team/team.png';
 // import courseVideoFile from ''; 
 // import testimonialVideoFile from '';
 
