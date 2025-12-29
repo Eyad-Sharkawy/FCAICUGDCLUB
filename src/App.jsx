@@ -58,14 +58,14 @@ const teamMembersData = [
     { id: 8, name: 'abdullah', title: 'Backend Programmer', image: abdullahImg },
     { id: 9, name: 'mahmoud', title: 'Concept Artist', image: mahmoudImg },
     { id: 10, name: 'roaa', title: 'AI Developer', image: roaaImg },
-    { id: 10, name: 'andrew', title: 'AI Developer', image: andrewImg },
-    { id: 10, name: 'nada', title: 'AI Developer', image: nadaImg },
-    { id: 10, name: 'ammar', title: 'AI Developer', image: ammarImg },
-    { id: 10, name: 'lojain', title: 'AI Developer', image: lojainImg },
-    { id: 10, name: 'ayat', title: 'AI Developer', image: ayatImg },
-    { id: 10, name: 'habiba', title: 'AI Developer', image: habibaImg },
-    { id: 10, name: 'abdelrahman', title: 'AI Developer', image: bahaaImg },
-    { id: 10, name: 'seba', title: 'AI Developer', image: sebaImg },
+    { id: 11, name: 'andrew', title: 'AI Developer', image: andrewImg },
+    { id: 12, name: 'nada', title: 'AI Developer', image: nadaImg },
+    { id: 13, name: 'ammar', title: 'AI Developer', image: ammarImg },
+    { id: 14, name: 'lojain', title: 'AI Developer', image: lojainImg },
+    { id: 15, name: 'ayat', title: 'AI Developer', image: ayatImg },
+    { id: 16, name: 'habiba', title: 'AI Developer', image: habibaImg },
+    { id: 17, name: 'abdelrahman', title: 'AI Developer', image: bahaaImg },
+    { id: 18, name: 'seba', title: 'AI Developer', image: sebaImg },
 ];
 
 
@@ -87,7 +87,7 @@ const videoThumbnails = Array.from({ length: totalThumbnails }, (_, i) => {
 });
 
 const statsData = [
-    { label: 'Total Trained Students', icon: '🧑🎓', value: 20 },
+    { label: 'Total Trained Students', icon: '🧑‍🎓', value: 20 },
     { label: 'Certified Training Hours', icon: '⏳', value: 62 },
     { label: 'Graduation Projects Launched', icon: '🕹️', value: 20 },
     { label: 'Employment Rate from Club', icon: '💼', value: 15 },
@@ -114,7 +114,10 @@ const useInView = (ref) => {
         }
         return () => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
-            if (ref.current) { observer.unobserve(ref.current); }
+            if (ref.current) { 
+                observer.unobserve(ref.current);
+            }
+            observer.disconnect();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref]);
@@ -127,14 +130,23 @@ const useCounter = (targetValue, duration, isInView) => {
     useEffect(() => {
         if (!isInView) return;
 
-        let start = 0;
         const end = parseInt(targetValue, 10);
-        const stepTime = Math.abs(Math.floor(duration / (end - start)));
+        if (isNaN(end) || end <= 0) return;
 
+        const difference = end - 0;
+        if (difference === 0) {
+            setCount(end);
+            return;
+        }
+
+        const stepTime = Math.max(1, Math.abs(Math.floor(duration / difference)));
+
+        let current = 0;
         const timer = setInterval(() => {
-            start += 1;
-            setCount(start);
-            if (start === end) {
+            current += 1;
+            setCount(current);
+            if (current >= end) {
+                setCount(end);
                 clearInterval(timer);
             }
         }, stepTime);
@@ -227,19 +239,25 @@ const HeroSection = () => {
     
     useEffect(() => {
         const fullText = changingTexts[currentTextIndex];
+        if (!fullText) return;
+
         const handleTyping = () => {
-            if (isDeleting) {
-                setDisplayedText(prev => prev.substring(0, prev.length - 1));
-                if (displayedText === '') {
-                    setIsDeleting(false); 
-                    setCurrentTextIndex(prev => (prev + 1) % changingTexts.length);
+            setDisplayedText(prev => {
+                if (isDeleting) {
+                    const newText = prev.substring(0, prev.length - 1);
+                    if (newText === '') {
+                        setIsDeleting(false);
+                        setCurrentTextIndex(prevIndex => (prevIndex + 1) % changingTexts.length);
+                    }
+                    return newText;
+                } else {
+                    const newText = fullText.substring(0, prev.length + 1);
+                    if (newText === fullText) {
+                        setTimeout(() => setIsDeleting(true), 2500);
+                    }
+                    return newText;
                 }
-            } else {
-                setDisplayedText(prev => fullText.substring(0, prev.length + 1));
-                if (displayedText === fullText) {
-                    setTimeout(() => setIsDeleting(true), 2500);
-                }
-            }
+            });
         };
 
         const speed = isDeleting ? 70 : 120;
@@ -350,7 +368,13 @@ const WhoWeAre = () => {
                     </ul>
                     <a 
                         href="#team"
-                        onClick={(e) => document.getElementById('team').scrollIntoView({ behavior: 'smooth' })}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById('team');
+                            if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
                         className="cta-button" 
                         style={{ marginTop: '20px'}}
                     >
@@ -410,11 +434,8 @@ const CourseIllustration = () => {
     const [isMuted, setIsMuted] = useState(true); 
 
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch(error => {
-                console.log("Autoplay failed (muted) in Courses:", error);
-            });
-        }
+        // Video will be played manually by user via controls
+        // No autoplay needed here since autoPlay={false}
     }, []);
 
     const toggleMute = () => {
@@ -471,7 +492,7 @@ const CourseIllustration = () => {
                             {/* Duplicate the list for seamless looping */}
                             {[...videoThumbnails, ...videoThumbnails].map((video, index) => (
                                     <a 
-                                        key={index} 
+                                        key={`${video.id}-${index}`} 
                                         href={video.youtubeLink} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
@@ -633,7 +654,14 @@ const ContactUsSection = () => (
           {/* Right Side: Contact Form */}
           <div className="right-side">
             <h3 style={{color: 'var(--color-primary)', marginBottom: '30px'}}>Send Us a Message</h3>
-            <form className="contact-form">
+            <form 
+                className="contact-form"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    // TODO: Implement form submission logic
+                    alert('Form submission will be implemented soon!');
+                }}
+            >
                 <input type="text" placeholder="Full Name" required />
                 <input type="email" placeholder="Email Address" required />
                 <input type="text" placeholder="Subject" />
@@ -654,7 +682,10 @@ const ContactUsSection = () => (
 const Footer = () => {
     const scrollToSection = (e, id) => {
         e.preventDefault();
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
     };
     
     // Replace with your actual logo image path
