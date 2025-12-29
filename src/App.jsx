@@ -29,6 +29,7 @@ import roaaImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/omar.pn
 
 
 import vidThumbnail from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/thumbnails/thumbnail1.jpg';
+import teamImg from 'C:/Users/Omar Rabih/FCAICUGDCLUB/public/assets/team/team.png';
 // import courseVideoFile from ''; 
 // import testimonialVideoFile from '';
 
@@ -333,7 +334,7 @@ const WhoWeAre = () => {
                 {/* RIGHT CONTENT (Image) - This DIV moves to the left in CSS (row-reverse) */}
                 <div className="right-content">
                     {/* Replace with your actual community image path */}
-                    <img src="./assets/team/team.jpg" alt="Club Members Photo" />
+                    <img src="/assets/team/team.png" alt="Club Members Photo" />
                 </div>
                 
                 {/* LEFT CONTENT (Text) - This DIV moves to the right in CSS (row-reverse) */}
