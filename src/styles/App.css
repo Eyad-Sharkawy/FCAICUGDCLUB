@@ -378,7 +378,6 @@ a:hover {
 }
 
 .who-we-are-section .split-layout {
-  /* NEW: Image Left, Text Right (Reversed layout) */
   flex-direction: row-reverse;
   align-items: flex-start;
 }
@@ -423,9 +422,9 @@ a:hover {
   border-radius: var(--border-radius-base);
   box-shadow: var(--shadow-base);
   transition: transform 0.5s;
-  width: 100%;
+  width: 90%;
   /* Ensure image fills container */
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .who-we-are-section .right-content img:hover {
